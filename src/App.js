@@ -3,7 +3,7 @@ import { useState } from "react";
 export default function TipCalculator() {
   const [bill, setBill] = useState("");
   const [tipPercentage, setTipPercentage] = useState("");
-  const [people, setPeople] = useState("");
+  const [people, setPeople] = useState("1");
   const [tipAmount, setTipAmount] = useState(0);
   const [totalAmount, setTotalAmount] = useState(0);
   const [amountPerPerson, setAmountPerPerson] = useState(0);
