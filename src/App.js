@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import "./App.css";
 
 export default function TipCalculator() {
   const [bill, setBill] = useState("");
@@ -8,19 +9,23 @@ export default function TipCalculator() {
   const [totalAmount, setTotalAmount] = useState(0);
   const [amountPerPerson, setAmountPerPerson] = useState(0);
 
-  const calculateTip = () => {
+  useEffect(() => {
     const billValue = parseFloat(bill);
     const tipValue = parseFloat(tipPercentage);
     const peopleValue = parseInt(people);
-    
+
     if (!isNaN(billValue) && !isNaN(tipValue) && peopleValue > 0) {
       const tip = (billValue * tipValue) / 100;
       const total = billValue + tip;
       setTipAmount(tip);
       setTotalAmount(total);
       setAmountPerPerson(total / peopleValue);
+    } else {
+      setTipAmount(0);
+      setTotalAmount(0);
+      setAmountPerPerson(0);
     }
-  };
+  }, [bill, tipPercentage, people]);
 
   return (
     <div>
@@ -49,7 +54,6 @@ export default function TipCalculator() {
           onChange={(e) => setPeople(e.target.value)}
         />
       </div>
-      <button onClick={calculateTip}>Calculate</button>
       <div>
         <p>Tip Amount: ${tipAmount.toFixed(2)}</p>
         <p>Total Amount: ${totalAmount.toFixed(2)}</p>
